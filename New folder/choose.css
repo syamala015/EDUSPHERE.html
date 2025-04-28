@@ -1,0 +1,36 @@
+body {
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-align: center;
+    background: linear-gradient(to right, #9be7cf, #8A2BE2);
+    color: rgb(58, 4, 4);
+    padding: 30px;
+    box-shadow: 20px 40px 10px rgba(132, 125, 131, 0.2);
+}
+.container {
+    background: rgb(146, 224, 201);
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    margin: auto;
+    box-shadow: 20px 20PX 20px rgba(82, 11, 11, 0.2);
+}
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #370303;
+}
+button {
+    background: #045341;
+    color: rgb(1, 15, 9);
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:hover {
+    background: #077858;
+}

@@ -1,0 +1,66 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Lucida Console", "Courier New", monospace;
+    background: linear-gradient(to right, #a2d2ff, #b58d9c); 
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.head {
+    background: linear-gradient(to right, #c1e6d6, #97dcd8); 
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 20px 4px 10px rgba(132, 125, 131, 0.2);
+    width: 350px;
+    text-align: center;
+}
+
+h2 {
+    font-family: "Lucida Console", "Courier New", monospace;
+    color: rgb(44, 7, 30); 
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+button {
+    background: linear-gradient(to right, #28a873, #0c7268, #db97cd);
+    color: black;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: 0.3s;
+    margin-bottom: 1rem;
+}
+
+button:hover {
+    background: linear-gradient(to right, #13753d, #bc99b7, #89CFF0);
+}
+
+#tutor-upload {
+    display: none;
+    margin-top: 10px;
+}
+#google-signup{
+background:linear-gradient(to right, #28a873, #0c7268, #db97cd); ;
+
+}

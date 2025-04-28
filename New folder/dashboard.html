@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h1>EDUSPHERE</h1>
+    <title>EduFreelance Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body ng-app="EdusphereApp" ng-controller="DashboardController">
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h2>EDUSPHERE</h2>
+        <a href="#" ng-click="showSection('home')">Home</a>
+        <a href="#" ng-click="showSection('tutor')">Tutor Panel</a>
+        <a href="#" ng-click="showSection('parent')"> Parent Panel</a>
+        <a href="#" ng-click="showSection('student')">Student Panel</a>
+        <a href="#" ng-click="showSection('settings')"> Settings</a>
+        <button onclick="logout()">Logout</button>
+
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div ng-show="currentSection === 'home'">
+            <h2>Welcome to EDUSPHERE Dashboard</h2>
+        </div>
+
+        <div ng-show="currentSection === 'tutor'">
+            <h2>Tutor Dashboard</h2>
+            <p>Manage your classes and students.</p>
+            <button ng-click="scheduleClass()">Schedule a Class</button>
+        </div>
+
+        <div ng-show="currentSection === 'parent'">
+            <h2>Parent Dashboard</h2>
+            <p>View and manage your child's progress.</p>
+            <button ng-click="bookTutor()">Book a Tutor</button>
+        </div>
+
+        <div ng-show="currentSection === 'student'">
+            <h2>Student Dashboard</h2>
+            <p>Access study materials and exam prep.</p>
+            <button ng-click="downloadMaterials()">Download Materials</button>
+        </div>
+
+        <div ng-show="currentSection === 'settings'">
+            <h2>Settings</h2>
+            <p>Update profile, notifications, and security settings.</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+     function logout() {
+        localStorage.clear();
+        window.location.assign("login.html"); // Try assign() instead of replace()
+    }
+    </script>
+</body>
+</html>

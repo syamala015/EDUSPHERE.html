@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EDUSPHERE - Login</title>
+    <link rel="stylesheet" href="login.css">
+    <script type="text/javascript" src="login.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="head">
+        <h2>Welcome to EDUSPHERE</h2>
+        <div class="tab">
+            <button class="tablink" onclick="openTab(event, 'login')">Login</button>
+            <button class="tablink" onclick="openTab(event, 'signup')">Sign Up</button>
+        </div>
+        
+        <!-- Login Form -->
+        <div id="login" class="tabcontent">
+            <form>
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Enter your email">
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter your password">
+<input type="checkbox" id="show-password" onclick="togglePassword()"> Show Password
+                <button type="submit">Login</button>
+
+                <p>Or login with:</p>
+                <div id="google-login"></div>
+            </form>
+        </div>
+        
+        <!-- Sign-Up Form -->
+        <div id="signup" class="tabcontent">
+            <form id="signup-form">
+                <label for="role">I am a:</label>
+                <select id="role" onchange="showUpload()">
+                    <option value="parent">Parent</option>
+                    <option value="tutor">Tutor</option>
+                </select>
+                
+                <label for="signup-firstname">First Name:</label>
+                <input type="text" id="signup-firstname" placeholder="Enter your first name">
+                
+                <label for="signup-lastname">Last Name:</label>
+                <input type="text" id="signup-lastname" placeholder="Enter your last name">
+                
+                <label for="signup-email">Email:</label>
+                <input type="email" id="signup-email" placeholder="Enter your email">
+                
+                <label for="signup-password">Password:</label>
+                <input type="password" id="signup-password" placeholder="Create a password">
+<input type="checkbox" id="show-password" onclick="togglePassword()"> Show Password
+                
+                <div id="tutor-upload" style="display:none;">
+                    <label for="document">Upload Verification Document:</label>
+                    <input type="file" id="document">
+                </div>
+
+                <button type="submit">Sign Up Now</button>
+
+                <p>Or sign up with:</p>
+                <div id="google-signup"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Google OAuth Configuration -->
+    <script>
+        function openTab(event, tabName) {
+            var tabcontent = document.getElementsByClassName("tabcontent");
+            for (var i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            var tablinks = document.getElementsByClassName("tablink");
+            for (var i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).style.display = "block";
+            event.currentTarget.classList.add("active");
+        }
+
+        function showUpload() {
+            var roleDropdown = document.getElementById("role");
+            var uploadSection = document.getElementById("tutor-upload");
+
+            if (roleDropdown.value === "tutor") {
+                uploadSection.style.display = "block";
+            } else {
+                uploadSection.style.display = "none";
+            }
+        }
+
+        function handleCredentialResponse(response) {
+            console.log("Google ID Token:", response.credential);
+            alert("Google Sign-In Successful!");
+        }
+
+        window.onload = function () {
+            google.accounts.id.initialize({
+                client_id: "YOUR_GOOGLE_CLIENT_ID",
+                callback: handleCredentialResponse
+            });
+
+            google.accounts.id.renderButton(
+                document.getElementById("google-login"),
+                { theme: "outline", size: "large", text: "continue_with" }
+            );
+
+            google.accounts.id.renderButton(
+                document.getElementById("google-signup"),
+                { theme: "outline", size: "large", text: "signup_with" }
+            );
+
+            // Default to Login tab
+            document.getElementById("login").style.display = "block";
+            document.querySelector(".tablink").classList.add("active");
+        };
+
+        document.getElementById('signup-form').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+
+            try {
+                const response = await fetch('http://localhost:3000/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const result = await response.text();
+                alert(result);
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to sign up');
+            }
+        });
+    </script>
+</body>
+</html>
